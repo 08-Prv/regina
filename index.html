@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. S. Regina | Academic & Research Portfolio</title>
+    <style>
+        :root {
+            --primary: #0f172a;
+            --secondary: #334155;
+            --accent: #3b82f6;
+            --success: #10b981;
+            --bg: #f8fafc;
+            --white: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* Creative Header */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, #1e293b 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);
+        }
+
+        header h1 { margin: 0; font-size: 3.2rem; font-weight: 800; letter-spacing: -1px; }
+        header .designation { font-size: 1.25rem; color: var(--accent); font-weight: 600; margin-top: 10px; }
+        header .contacts { margin-top: 20px; font-size: 0.9rem; color: #cbd5e1; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+
+        /* Creative Dashboard Grid */
+        .dashboard {
+            max-width: 1200px;
+            margin: -40px auto 60px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        .tag-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid #f1f5f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .tag-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+            border-color: var(--accent);
+        }
+
+        .tag-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .tag-card h3 { margin: 0; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; color: var(--secondary); }
+
+        /* Modal / Content Overlay */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(8px);
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: var(--white);
+            margin: 40px auto;
+            padding: 50px;
+            width: 90%;
+            max-width: 1000px;
+            border-radius: 24px;
+            position: relative;
+            text-align: left;
+            animation: modalIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes modalIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+
+        .close-btn {
+            position: absolute;
+            top: 25px; right: 30px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        /* Detail Styling */
+        .section-header { border-left: 6px solid var(--accent); padding-left: 20px; margin-bottom: 30px; }
+        .section-header h2 { margin: 0; color: var(--primary); font-size: 2rem; }
+        
+        .data-block { background: #f8fafc; padding: 20px; border-radius: 12px; margin-bottom: 20px; border: 1px solid #e2e8f0; }
+        .data-block h4 { margin-top: 0; color: var(--accent); font-size: 1.1rem; }
+        
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        td, th { padding: 12px; text-align: left; border-bottom: 1px solid #e2e8f0; }
+        th { color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase; }
+
+        footer { text-align: center; padding: 40px; color: var(--text-muted); font-size: 0.9rem; }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.2rem; }
+            .modal-content { padding: 25px; margin: 20px auto; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Dr. S. REGINA</h1>
+    <div class="designation">Assistant Professor • Researcher • Ph.D.</div>
+    <div class="contacts">
+        <span>📧 regina.shali@gmail.com</span>
+        <span>📞 +91-6380681782 / +91-9486913749</span>
+        <span>📍 Madurai, Tamil Nadu</span>
+    </div>
+</header>
+
+<div class="dashboard">
+    <div class="tag-card" onclick="showModal('edu')">
+        <div class="icon">🎓</div>
+        <h3>Education</h3>
+    </div>
+    <div class="tag-card" onclick="showModal('exp')">
+        <div class="icon">💼</div>
+        <h3>Experience</h3>
+    </div>
+    <div class="tag-card" onclick="showModal('res')">
+        <div class="icon">🔬</div>
+        <h3>Research</h3>
+    </div>
+    <div class="tag-card" onclick="showModal('awards')">
+        <div class="icon">🏆</div>
+        <h3>Awards</h3>
+    </div>
+    <div class="tag-card" onclick="showModal('patents')">
+        <div class="icon">📜</div>
+        <h3>Patents</h3>
+    </div>
+    <div class="tag-card" onclick="showModal('resource')">
+        <div class="icon">🎤</div>
+        <h3>Talks</h3>
+    </div>
+    <div class="tag-card" onclick="showModal('workshops')">
+        <div class="icon">🛠️</div>
+        <h3>Training</h3>
+    </div>
+    <div class="tag-card" onclick="showModal('roles')">
+        <div class="icon">⚡</div>
+        <h3>Responsibilities</h3>
+    </div>
+</div>
+
+<div id="appModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <div id="modalContent"></div>
+    </div>
+</div>
+
+<footer>&copy; 2024 Dr. S. Regina. Designed for Excellence.</footer>
+
+<script>
+    const data = {
+        edu: `
+            <div class="section-header"><h2>Education</h2></div>
+            <div class="data-block">
+                <table>
+                    <tr><th>Degree</th><th>Institution</th><th>Year</th><th>Result</th></tr>
+                    <tr><td><b>Ph.D</b></td><td>Sethu Institute of Technology</td><td>2022</td><td>9.75 CGPA</td></tr>
+                    <tr><td><b>M.E (Embedded)</b></td><td>Raja College of Engineering</td><td>2011</td><td>8.44 (First Class)</td></tr>
+                    <tr><td><b>B.E (ECE)</b></td><td>PSYEC, Sivagangai</td><td>2005</td><td>83% (Distinction)</td></tr>
+                </table>
+            </div>
+            <div class="data-block">
+                <h4>Academic Accolades</h4>
+                <ul>
+                    <li><b>Malaysia S. Pandian Medal:</b> Awarded for securing 1st Position in Anna University B.E. Examinations.</li>
+                    <li><b>Best Student Award:</b> Received for the 2004-2005 academic batch.</li>
+                    <li><b>Young Scientist:</b> Received certificate from TNSCST Student Scientist Programme (1997).</li>
+                </ul>
+            </div>`,
+        
+        exp: `
+            <div class="section-header"><h2>Professional Experience</h2></div>
+            <div class="data-block">
+                <h4>Teaching (7+ Years Total)</h4>
+                <ul>
+                    <li><b>Assistant Professor:</b> Velammal College of Engineering & Technology (2024–Present).</li>
+                    <li><b>Associate Professor:</b> Pandian Saraswathi Yadav Engineering College (2022–2024).</li>
+                    <li><b>Assistant Professor:</b> Raja College of Engineering and Technology (2011–2015).</li>
+                </ul>
+            </div>
+            <div class="data-block">
+                <h4>Industry</h4>
+                <p><b>Senior Project Engineer:</b> Wipro Technologies, Chennai (2.5 Years). Worked on significant Mainframe projects for US-based clients.</p>
+            </div>`,
+
+        res: `
+            <div class="section-header"><h2>Research Portfolio</h2></div>
+            <div class="data-block">
+                <h4>Ph.D. Thesis</h4>
+                <p><i>"Design and Performance Investigation of Metamaterial-Based Antennas with FR-4 and Leather Substrates"</i></p>
+            </div>
+            <div class="data-block">
+                <h4>Selected Publications</h4>
+                <ul>
+                    <li><b>Oxidation Communications (2025):</b> Analysis of the impacts of new catalytic materials.</li>
+                    <li><b>Textile Research Journal (2021):</b> Flexible leather substrate dual-band wearable antenna.</li>
+                    <li><b>YMER (2023):</b> Dental caries detection using NIR images with modified U-Net.</li>
+                    <li><b>Book Chapter (2023):</b> Split Ring Resonator Inspired Printed Antennas, Scrivener-Wiley.</li>
+                </ul>
+            </div>`,
+
+        awards: `
+            <div class="section-header"><h2>Awards & Recognition</h2></div>
+            <div class="data-block">
+                <h4>Professional Honors</h4>
+                <ul>
+                    <li><b>Innovative Faculty Award:</b> Received from NFISRT (2024).</li>
+                    <li><b>Best Faculty Award:</b> Received from TFRF (2024).</li>
+                    <li><b>Mainframe Contribution Award:</b> Received from a US Client during tenure at Wipro.</li>
+                    <li><b>Feather-in-my-cap Award:</b> Recognition of sincere work at Wipro Technologies.</li>
+                </ul>
+            </div>
+            <div class="data-block">
+                <h4>Innovation & Hackathons</h4>
+                <ul>
+                    <li><b>₹1 Lakh Cash Prize:</b> Won in TNSI Contest (2023) for the "Neurocare" project idea.</li>
+                    <li><b>₹30,000 Cash Prize:</b> Won in Healthcare Hackathon (2023) for "WoW Care".</li>
+                    <li><b>₹10,000 Cash Prize:</b> Secured 3rd place in StartupTN Cancer Hackathon (2023).</li>
+                </ul>
+            </div>`,
+
+        patents: `
+            <div class="section-header"><h2>Intellectual Property</h2></div>
+            <div class="data-block">
+                <h4>Published Patents</h4>
+                <ul>
+                    <li><b>Microstrip Notch Patch Antenna:</b> Patent No. 436682-001.</li>
+                    <li><b>Jacket for Early Breast Cancer Detection:</b> Patent No. 401671-001.</li>
+                    <li><b>Wearable Device for Child Safety:</b> Patent No. 202341039980 A.</li>
+                    <li><b>Heart Disease Real-Time Detection:</b> Patent No. 202341039999 A.</li>
+                </ul>
+            </div>
+            <div class="data-block">
+                <h4>In-Process Patents</h4>
+                <ul>
+                    <li>AI Based Seed Dibbling System.</li>
+                    <li>Cloud Server Based Coal Mine Safety and Health Monitoring System.</li>
+                    <li>Foldable Walking Chair Stick for Orthopedic Patients.</li>
+                </ul>
+            </div>`,
+
+        resource: `
+            <div class="section-header"><h2>Invited Talks & Lectures</h2></div>
+            <div class="data-block">
+                <table>
+                    <tr><th>Topic</th><th>Venue</th><th>Date</th></tr>
+                    <tr><td>Innovative Flexible Antenna</td><td>Velammal College</td><td>Jan 2025</td></tr>
+                    <tr><td>Igniting Innovation</td><td>St. Michael College</td><td>Nov 2024</td></tr>
+                    <tr><td>Startup Spark to Business Blaze</td><td>Syed Ammal Arts College</td><td>Oct 2024</td></tr>
+                    <tr><td>Prototype Process Design</td><td>ACGCET, Karaikudi</td><td>Aug 2023</td></tr>
+                    <tr><td>Machine Learning in Life Sciences</td><td>PSYEC</td><td>Jan 2023</td></tr>
+                </table>
+            </div>`,
+
+        workshops: `
+            <div class="section-header"><h2>Training & Certifications</h2></div>
+            <div class="data-block">
+                <ul>
+                    <li><b>ATAL FDP (2024):</b> Reconfigurable Intelligent Surfaces, NIT Trichy.</li>
+                    <li><b>AI & Robotics (2024):</b> National Workshop at Thiagarajar College of Engineering.</li>
+                    <li><b>Industry 4.0:</b> Passed NPTEL course with Elite status.</li>
+                    <li><b>Innovation Ambassador:</b> Certified at Foundation, Advanced, and Upskilling levels by IIC.</li>
+                </ul>
+            </div>`,
+
+        roles: `
+            <div class="section-header"><h2>Institutional Responsibilities</h2></div>
+            <div class="data-block">
+                <h4>Current Administrative Roles</h4>
+                <ul>
+                    <li>Student R&D Co-ordinator.</li>
+                    <li>IIC (Institution's Innovation Council) Co-ordinator.</li>
+                    <li>NBA & NAAC Criterion 1 Co-ordinator.</li>
+                </ul>
+            </div>
+            <div class="data-block">
+                <h4>Previous Mentorship & Roles</h4>
+                <ul>
+                    <li><b>Research Co-ordinator:</b> Led the documentation for R&D approval from Anna University CFR.</li>
+                    <li><b>IBM Naalaiya Thiran:</b> SPOC and faculty mentor for student projects (2022).</li>
+                    <li><b>Naan Mudhalvan:</b> Faculty mentor for Artificial Intelligence and Machine Learning courses.</li>
+                    <li><b>Placement Co-ordinator:</b> Managed departmental placement activities.</li>
+                </ul>
+            </div>`
+    };
+
+    function showModal(section) {
+        document.getElementById('modalContent').innerHTML = data[section];
+        document.getElementById('appModal').style.display = "block";
+        document.body.style.overflow = "hidden";
+    }
+
+    function closeModal() {
+        document.getElementById('appModal').style.display = "none";
+        document.body.style.overflow = "auto";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == document.getElementById('appModal')) closeModal();
+    }
+</script>
+
+</body>
+</html>
